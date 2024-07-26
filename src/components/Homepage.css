@@ -1,5 +1,231 @@
-.homepage-container {
-    height: 100vh; /* Make sure the div takes the full height */
+/* Body Background */
+body {
     background: linear-gradient(to bottom, #081221, #03080f);
-    color: white; /* Set text color to white for better contrast */
+    margin: 0;
+    font-family: 'Mulish', sans-serif;
+}
+
+/* Homepage Container */
+.homepage-container {
+    height: 100vh; /* Full viewport height */
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white; /* Text color */
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navigation Container */
+.nav-container {
+    flex-shrink: 0;
+    width: 100%;
+}
+
+/* Content Area */
+.content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 60px;
+    box-sizing: border-box;
+}
+
+/* Filter Container */
+.filter-container {
+    width: 350px;
+    height: fit-content;
+    background-color: #0e1a2b;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #c1d1e8;
+    box-sizing: border-box;
+}
+
+/* Filter Component Label */
+.filter-component label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+/* Input and Select Styles */
+.filter-component input,
+.filter-component select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #3c3f58;
+    border-radius: 4px;
+    background-color: #182c47;
+    color: #c1d1e8;
+    box-sizing: border-box;
+}
+
+/* Placeholder Text Color */
+.filter-component input::placeholder {
+    color: #c1d1e8;
+}
+
+/* Button Styles */
+.filter-component button {
+    width: 100%;
+    padding: 10px;
+    background-color: #5692e8;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.filter-component button:hover {
+    background-color: #467cc6;
+}
+
+/* Responsive Design */
+/* Tablet */
+@media (max-width: 768px) {
+    .content {
+        padding: 20px;
+        flex-direction: column;
+    }
+
+    .filter-container {
+        width: 80%;
+        max-width: 500px;
+        padding: 15px;
+    }
+
+    .filter-component label {
+        font-size: 13px;
+    }
+
+    .filter-component input,
+    .filter-component select {
+        padding: 8px;
+        margin-top: 3px;
+        margin-bottom: 12px;
+    }
+
+    .filter-component button {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .content {
+        padding: 10px;
+    }
+
+    .filter-container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .filter-component label {
+        font-size: 12px;
+    }
+
+    .filter-component input,
+    .filter-component select {
+        padding: 6px;
+        margin-top: 2px;
+        margin-bottom: 10px;
+    }
+
+    .filter-component button {
+        padding: 6px;
+        font-size: 12px;
+    }
+}
+
+h3 {
+    color: white;
+    margin-bottom: 36px;
+}
+
+/* Result Container */
+.result-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: calc(100% - 370px);
+    padding-left: 20px;
+    padding-right: 20px; /* Add padding-right */
+    box-sizing: border-box;
+}
+
+/* Game Card */
+.game-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #0e1a2b;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #c1d1e8;
+}
+
+.game-name, .game-rating, .game-summary {
+    margin: 0 10px;
+}
+
+.game-name {
+    flex: 1;
+}
+
+.game-rating {
+    flex: 0 0 36px;
+}
+
+/* Basic styles for the summary container */
+.game-summary {
+    display: -webkit-box;        /* Required for WebKit-based browsers */
+    -webkit-box-orient: vertical; /* Required for WebKit-based browsers */
+    -webkit-line-clamp: 3;        /* Number of lines to show before truncation */
+    overflow: hidden;             /* Hide the overflow text */
+    text-overflow: ellipsis;      /* Add ellipsis at the end */
+    max-width: 100%;              /* Ensure it fits within the container */
+}
+
+/* For browsers that support the standard line-clamp property in the future */
+
+
+@media (max-width: 768px) {
+    .result-container {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-card {
+        flex-direction: column;
+    }
+
+    .game-name, .game-rating, .game-summary {
+        margin: 5px 0;
+    }
+}
+
+@media (min-width: 1330px) and (min-height: 1440px) {
+    .result-container {
+        margin-right: 115px;
+    }
+    .game-card {
+        padding: 40px; /* Increase padding */
+    }
+}
+
+.outer-game-card {
+    background:  black;
+    padding-left: 132px;
 }
