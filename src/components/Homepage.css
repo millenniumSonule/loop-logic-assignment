@@ -1,0 +1,5 @@
+.homepage-container {
+    height: 100vh; /* Make sure the div takes the full height */
+    background: linear-gradient(to bottom, #081221, #03080f);
+    color: white; /* Set text color to white for better contrast */
+}

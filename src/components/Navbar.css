@@ -1,0 +1,75 @@
+/* Navbar.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Mulish', sans-serif;
+  }
+  
+  .navbar {
+    padding: 1rem 2rem;
+    background: linear-gradient(to bottom, #081221, #03080f);
+    color: white;
+  }
+  
+  .navbar-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 3rem;
+    opacity: 0.1;
+    z-index: 0;
+  }
+  
+  .navbar-links {
+    display: flex;
+    gap: 2rem;
+    z-index: 99;
+    position: relative;
+    left: 34px;
+    bottom: 24px;
+  }
+  
+  .navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1rem;
+    }
+  
+    .navbar-links {
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      position: static;
+    }
+  
+    .navbar-links a {
+      padding: 0.5rem 0;
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .navbar-logo {
+      font-size: 2rem;
+    }
+  
+    .navbar-links {
+      gap: 0.5rem;
+      position: static;
+    }
+  
+    .navbar-links a {
+      padding: 0.5rem 0;
+      font-size: 0.9rem;
+    }
+  }
+  
