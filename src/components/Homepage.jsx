@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
-import LoadingSpinner from './LoadingSpinner';
 import './Homepage.css';
 
 // Helper function to format the date
@@ -15,76 +14,82 @@ const Homepage = () => {
   const [orderBy, setOrderBy] = useState('Release Date');
   const [games, setGames] = useState([]);
   const [filteredGames, setFilteredGames] = useState([]);
-  const [loading, setLoading] = useState(false); // Added loading state
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    const fetchGames = async () => {
-      setLoading(true); // Set loading to true before fetching
+    const fetchGames = async (filters = {}, pagination = { page: 1, pageSize: 10 }, sort = '') => {
       try {
-        const response = await fetch('https://spa.api.logicloop.io/api/games');
+        let query = `?pagination[page]=${pagination.page}&pagination[pageSize]=${pagination.pageSize}`;
+
+        Object.keys(filters).forEach((key) => {
+          const filter = filters[key];
+          query += `&filters[${key}][${filter.operator}]=${filter.value}`;
+        });
+
+        if (sort) {
+          query += `&sort=${sort}`;
+        }
+
+        const response = await fetch(`https://spa.api.logicloop.io/api/games${query}`);
         const data = await response.json();
-        setGames(data.data || []);
-        setFilteredGames(data.data || []);
+        setGames(data.data);
+        setFilteredGames(data.data);
+        setTotalPages(data.meta.pagination.pageCount); // Assuming the total pages are returned in the response
       } catch (error) {
         console.error('Error fetching games:', error);
-      } finally {
-        setLoading(false); // Set loading to false after fetching
       }
     };
-    fetchGames();
-  }, []);
 
-  useEffect(() => {
-    onFilterChange({ name, score, orderBy });
-  }, [name, score, orderBy]);
+    const filters = {};
+    if (name) filters['name'] = { operator: '$containsi', value: name };
+    if (score) filters['rating'] = { operator: '$gte', value: score };
+
+    // Convert orderBy to appropriate sort parameter
+    let sort = '';
+    switch (orderBy) {
+      case 'Name':
+        sort = 'name'; // Adjust as needed if API expects different field name
+        break;
+      case 'Score':
+        sort = 'rating'; // Adjust as needed if API expects different field name
+        break;
+      case 'Release Date':
+        sort = 'createdAt'; // Adjust as needed if API expects different field name
+        break;
+      default:
+        sort = 'createdAt'; // Default sorting
+    }
+
+    fetchGames(filters, { page, pageSize: 10 }, sort);
+  }, [name, score, orderBy, page]);
 
   const handleNameChange = (event) => {
-    setName(event.target.value);
+    const newName = event.target.value;
+    setName(newName);
+    setPage(1); // Reset to first page when filters change
   };
 
   const handleScoreChange = (event) => {
-    setScore(event.target.value);
+    const newScore = event.target.value;
+    setScore(newScore);
+    setPage(1); // Reset to first page when filters change
   };
 
   const handleOrderByChange = (event) => {
-    setOrderBy(event.target.value);
+    const newOrderBy = event.target.value;
+    setOrderBy(newOrderBy);
   };
 
   const clearFilters = () => {
     setName('');
     setScore('');
     setOrderBy('Release Date');
+    setPage(1); // Reset to first page when filters are cleared
   };
 
-  const onFilterChange = async ({ name, score, orderBy }) => {
-    setLoading(true); // Set loading to true before fetching
-    try {
-      const queryParams = new URLSearchParams();
-
-      if (name) {
-        queryParams.append('filters[name][$containsi]', name);
-      }
-
-      if (score) {
-        queryParams.append('filters[rating][$gte]', score);
-      }
-
-      if (orderBy === 'Name') {
-        queryParams.append('sort', 'name');
-      } else if (orderBy === 'Score') {
-        queryParams.append('sort', 'rating:desc');
-      } else if (orderBy === 'Release Date') {
-        queryParams.append('sort', 'releaseDate:desc');
-      }
-
-      const response = await fetch(`https://spa.api.logicloop.io/api/games?${queryParams.toString()}`);
-      const data = await response.json();
-      setFilteredGames(data.data || []);
-    } catch (error) {
-      console.error('Error filtering games:', error);
-    } finally {
-      setLoading(false); // Set loading to false after fetching
-    }
+  const handlePagination = (newPage) => {
+    setPage(newPage);
   };
 
   return (
@@ -135,9 +140,7 @@ const Homepage = () => {
         </div>
 
         <div className="result-container">
-          {loading ? (
-            <LoadingSpinner /> // Show spinner while loading
-          ) : filteredGames && filteredGames.length > 0 ? (
+          {filteredGames.length > 0 ? (
             filteredGames.map((game) => (
               <div key={game.id} className="outer-game-card">
                 <div className="game-card">
@@ -150,6 +153,10 @@ const Homepage = () => {
           ) : (
             <p>No games found.</p>
           )}
+          <div className="pagination">
+            {page > 1 && <button onClick={() => handlePagination(page - 1)}>Previous</button>}
+            {page < totalPages && <button onClick={() => handlePagination(page + 1)}>Next</button>}
+          </div>
         </div>
       </div>
     </div>
