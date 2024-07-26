@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
+import LoadingSpinner from './LoadingSpinner'; // Import the spinner component
 import './Homepage.css';
 
 // Helper function to format the date
@@ -16,9 +17,11 @@ const Homepage = () => {
   const [filteredGames, setFilteredGames] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(false); // Add loading state
 
   useEffect(() => {
     const fetchGames = async (filters = {}, pagination = { page: 1, pageSize: 10 }, sort = '') => {
+      setLoading(true); // Set loading to true before starting fetch
       try {
         let query = `?pagination[page]=${pagination.page}&pagination[pageSize]=${pagination.pageSize}`;
 
@@ -38,6 +41,8 @@ const Homepage = () => {
         setTotalPages(data.meta.pagination.pageCount); // Assuming the total pages are returned in the response
       } catch (error) {
         console.error('Error fetching games:', error);
+      } finally {
+        setLoading(false); // Set loading to false after fetch is complete
       }
     };
 
@@ -45,7 +50,6 @@ const Homepage = () => {
     if (name) filters['name'] = { operator: '$containsi', value: name };
     if (score) filters['rating'] = { operator: '$gte', value: score };
 
-    // Convert orderBy to appropriate sort parameter
     let sort = '';
     switch (orderBy) {
       case 'Name':
@@ -140,7 +144,9 @@ const Homepage = () => {
         </div>
 
         <div className="result-container">
-          {filteredGames.length > 0 ? (
+          {loading ? (
+            <LoadingSpinner /> // Show spinner when loading
+          ) : filteredGames.length > 0 ? (
             filteredGames.map((game) => (
               <div key={game.id} className="outer-game-card">
                 <div className="game-card">

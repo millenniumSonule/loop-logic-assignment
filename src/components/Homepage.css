@@ -94,6 +94,8 @@ body {
     .content {
         padding: 20px;
         flex-direction: column;
+        display: flex;
+        align-items: center;
     }
 
     .filter-container {
