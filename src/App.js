@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css'
 import Homepage from './components/Homepage'
 import ContactPage from './components/Contactpage'
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (

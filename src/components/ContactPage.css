@@ -1,0 +1,131 @@
+/* Body Background */
+body {
+    background: linear-gradient(to bottom, #081221, #03080f);
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Mulish', sans-serif;
+}
+
+/* Fixed Navbar */
+.nav-container {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #0e1a2b;
+    z-index: 1000;
+}
+
+/* Contact Page Container */
+.contact-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 60px 20px 20px; /* Add padding to top to account for fixed navbar */
+    box-sizing: border-box;
+    background: linear-gradient(to bottom, #081221, #03080f);
+}
+
+/* Title and Text */
+.cp-title {
+    text-align: left;
+    width: 100%;
+    max-width: 800px;
+    margin: 124px auto 20px auto;
+}
+
+.cp-title h2 {
+    margin: 0;
+    padding-bottom: 10px;
+    color: #c1d1e8;
+}
+
+.cp-title p {
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #c1d1e8;
+}
+
+/* Contact Form */
+.contact-form {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #0e1a2b;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Styles */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.input-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container label {
+    margin-bottom: 5px;
+    color: #c1d1e8;
+}
+
+.input-container input,
+.input-container textarea {
+    padding: 10px;
+    border: 1px solid #3c3f58;
+    border-radius: 4px;
+    background-color: #182c47;
+    color: #c1d1e8;
+    box-sizing: border-box;
+}
+
+.input-container input::placeholder,
+.input-container textarea::placeholder {
+    color: #c1d1e8;
+}
+
+.send-button {
+    align-self: flex-end; /* Aligns the button to the right */
+    padding: 10px 20px; /* Adjust the padding if needed */
+    background-color: #5692e8;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.send-button:hover {
+    background-color: #467cc6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .input-group {
+        flex-direction: column;
+    }
+}
+
+.form p {
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #c1d1e8;
+}

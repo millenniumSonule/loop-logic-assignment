@@ -2,13 +2,14 @@
 body {
     background: linear-gradient(to bottom, #081221, #03080f);
     margin: 0;
+    box-sizing: border-box;
     font-family: 'Mulish', sans-serif;
 }
 
 /* Homepage Container */
 .homepage-container {
-    height: 100vh; /* Full viewport height */
-    width: 100vw;
+    min-height: 100vh; /* Full viewport height */
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,8 +20,11 @@ body {
 
 /* Navigation Container */
 .nav-container {
-    flex-shrink: 0;
     width: 100%;
+    background-color: #0e1a2b;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
 }
 
 /* Content Area */
@@ -28,8 +32,9 @@ body {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 60px;
+    padding: 80px 60px 60px; /* Add top padding to account for fixed navbar */
     box-sizing: border-box;
+    margin-top: 70px;
 }
 
 /* Filter Container */
@@ -94,7 +99,6 @@ body {
     .content {
         padding: 20px;
         flex-direction: column;
-        display: flex;
         align-items: center;
     }
 
@@ -228,6 +232,49 @@ h3 {
 }
 
 .outer-game-card {
-    background:  black;
+    background: black;
     padding-left: 132px;
 }
+
+/* Pagination Button Styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    background-color: #5692e8; /* Button background color */
+    color: #ffffff; /* Button text color */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pagination button:hover {
+    background-color: #467cc6; /* Button hover background color */
+  }
+  
+  .pagination button:disabled {
+    background-color: #3c3f58; /* Disabled button background color */
+    cursor: not-allowed;
+  }
+  
+  @media (max-width: 768px) {
+    .pagination button {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .pagination button {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+  }
+  
