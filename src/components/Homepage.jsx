@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
-import LoadingSpinner from './LoadingSpinner'; // Import the spinner component
+import LoadingSpinner from './LoadingSpinner'; 
 import './Homepage.css';
 
-// Helper function to format the date
+
 const formatDate = (dateString) => {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   return new Date(dateString).toLocaleDateString(undefined, options);
@@ -17,11 +17,11 @@ const Homepage = () => {
   const [filteredGames, setFilteredGames] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false); 
 
   useEffect(() => {
     const fetchGames = async (filters = {}, pagination = { page: 1, pageSize: 10 }, sort = '') => {
-      setLoading(true); // Set loading to true before starting fetch
+      setLoading(true); 
       try {
         let query = `?pagination[page]=${pagination.page}&pagination[pageSize]=${pagination.pageSize}`;
 
@@ -38,7 +38,7 @@ const Homepage = () => {
         const data = await response.json();
         setGames(data.data);
         setFilteredGames(data.data);
-        setTotalPages(data.meta.pagination.pageCount); // Assuming the total pages are returned in the response
+        setTotalPages(data.meta.pagination.pageCount);
       } catch (error) {
         console.error('Error fetching games:', error);
       } finally {
@@ -53,16 +53,16 @@ const Homepage = () => {
     let sort = '';
     switch (orderBy) {
       case 'Name':
-        sort = 'name'; // Adjust as needed if API expects different field name
+        sort = 'name'; 
         break;
       case 'Score':
-        sort = 'rating'; // Adjust as needed if API expects different field name
+        sort = 'rating'; 
         break;
       case 'Release Date':
-        sort = 'createdAt'; // Adjust as needed if API expects different field name
+        sort = 'createdAt'; 
         break;
       default:
-        sort = 'createdAt'; // Default sorting
+        sort = 'createdAt'; 
     }
 
     fetchGames(filters, { page, pageSize: 10 }, sort);
