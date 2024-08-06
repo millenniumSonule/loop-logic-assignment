@@ -23,6 +23,14 @@ const Navbar = () => {
             CONTACT
           </NavLink>
         </li>
+        <li>
+          <NavLink 
+            to="/AddGame" 
+            className={({ isActive }) => (isActive ? 'active-link' : 'link')}
+          >
+            Add Game
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );

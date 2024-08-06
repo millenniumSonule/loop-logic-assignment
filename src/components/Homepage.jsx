@@ -35,7 +35,7 @@ const Homepage = () => {
         }
 
         const response = await fetch(`https://spa.api.logicloop.io/api/games${query}`);
-        const data = await response.json();
+        const data = await response.json(); 
         setGames(data.data);
         setFilteredGames(data.data);
         setTotalPages(data.meta.pagination.pageCount);
@@ -95,6 +95,8 @@ const Homepage = () => {
   const handlePagination = (newPage) => {
     setPage(newPage);
   };
+
+  
 
   return (
     <div className="homepage-container">
